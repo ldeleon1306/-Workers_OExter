@@ -13,7 +13,7 @@ using System.Text;
 using Serilog;
 using Microsoft.Extensions.Configuration;
 
-namespace WorkerS_OExtern
+namespace Workers
 {
     public class WorkerFilterCheck : BackgroundService
     {
@@ -24,15 +24,29 @@ namespace WorkerS_OExtern
         {
             _logger = logger;
             _configuration = configuration;
+            _logger.LogInformation("inicio: {time}", DateTimeOffset.Now);
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                Log.Logger = new LoggerConfiguration().WriteTo.File(@"C:\Users\ldeleon\OneDrive - ANDREANI LOGISTICA SA\Documentos\Bp\vane caso tarejta naranja\EventosLog\LogEvents" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".log").CreateLogger();
-                CompareAsync();
-                await Task.Delay(9000000, stoppingToken);
+                try
+                {
+                    _logger.LogInformation("ANTES DE COMPARAR: {time}", DateTimeOffset.Now);
+                    Console.WriteLine("ANTES DE COMPARAR");
+                    //Log.Logger = new LoggerConfiguration().WriteTo.File(@"C:\Users\ldeleon\OneDrive - ANDREANI LOGISTICA SA\Documentos\Bp\vane caso tarejta naranja\EventosLog\LogEvents" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".log").CreateLogger();
+                    CompareAsync();
+                    Console.WriteLine("termino mala");
+                    await Task.Delay(180000, stoppingToken);
+                    Console.WriteLine("termino malb");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("termino mal");
+                    throw;
+                }
+              
             }
         }
 
@@ -46,39 +60,31 @@ namespace WorkerS_OExtern
 
                 var collection = database.GetCollection<BsonDocument>("TransaccionesPedidos");
                 int cont = 0;
-                //using (StreamReader leer = new StreamReader(@"C:\Users\ldeleon\OneDrive - ANDREANI LOGISTICA SA\Documentos\Bp\vane caso tarejta naranja\ordenExt.txt"))
-                using (StreamReader leer = new StreamReader(@"C:\Users\ldeleon\OneDrive - ANDREANI LOGISTICA SA\Documentos\Bp\vane caso tarejta naranja\idtran.txt"))
+
+                try
                 {
-                    while (!leer.EndOfStream)
+                    var list = await collection.Find(new BsonDocument())
+                .Limit(2) //retrive only two documents
+                .ToListAsync();
+                    foreach (var docs in list)
                     {
-                        string url = leer.ReadLine();
-
-                        try
-                        {
-                            var list = await collection.Find(new BsonDocument())
-                        .Limit(2) //retrive only two documents
-                        .ToListAsync();
-                            foreach (var docs in list)
-                            {
-                                Console.WriteLine(docs);
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-
-
-                        }
-                        break;
-
+                        _logger.LogInformation(docs.ToString());
+                        Console.WriteLine(docs);
                     }
                 }
+                catch (Exception ex)
+                {
+
+                }
+                _logger.LogInformation("ANTES DAL MAIL: {time}", DateTimeOffset.Now);
                 Mail.Mail m = new Mail.Mail(_configuration);
                 m.SendEmail("nada", "cliente");
-                Console.WriteLine(cont);
-
+                //Console.WriteLine(cont);
+                Console.WriteLine("ANTES DAL MAIL");
             }
             catch (Exception ex)
             {
+                _logger.LogInformation(ex.Message);
                 throw;
             }
         }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Net.Mail;
 using System.Text;
 
-namespace WorkerS_OExtern.Mail
+namespace Workers.Mail
 {
     public class Mail
     {
@@ -42,8 +42,8 @@ namespace WorkerS_OExtern.Mail
                 //  mail.Attachments.Add(attachment);
                 //}
 
-                string subject = string.Format($"WebService Serializacion {cliente} Recepción");
-                string bodyMsg = string.Format($"Se procesó un archivo xml, del cliente {cliente}");
+                string subject = string.Format($"Prueba {cliente} Mail");
+                string bodyMsg = string.Format($"Se procesó un mongo {cliente}");
                 mail.Subject = subject;
                 mail.Body = bodyMsg;
                 mail.IsBodyHtml = true;

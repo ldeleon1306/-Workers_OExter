@@ -53,16 +53,16 @@ namespace Workers.Mail
                 mail.Body = bodyMsg;
                 mail.IsBodyHtml = true;
                 Console.WriteLine(bodyMsg);
-                SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+                SmtpClient smtp = new SmtpClient("10.20.25.16");
                 smtp.EnableSsl = true;
-                smtp.Port = 25;
+                smtp.Port = 587;
                 smtp.UseDefaultCredentials = false;
 
-                string user = "leosendmailoe@gmail.com";
-                string pass = "ordenexterna";
-                NetworkCredential userCredential = new NetworkCredential(user, pass);
+                //string user = "leosendmailoe@gmail.com";
+                //string pass = "ordenexterna";
+                //NetworkCredential userCredential = new NetworkCredential(user, pass);
 
-                smtp.Credentials = userCredential;
+                //smtp.Credentials = userCredential;
 
                 smtp.Send(mail);
             }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Mail;
 using System.Text;
 
@@ -25,14 +26,18 @@ namespace Workers.Mail
         {
             try
             {
+                Console.WriteLine("entrando al mail");
                 MailMessage mail = new MailMessage();
-                mail.From = new MailAddress(_mailFrom);
-                var multiple = _mailTo.Split(';');
-                foreach (var to in multiple)
-                {
-                    if (to != string.Empty)
-                        mail.To.Add(to);
-                }
+                //Console.WriteLine(_mailFrom.ToString());
+                //Console.WriteLine(_mailTo);
+                mail.From = new MailAddress("ldeleon@andreani.com");
+                mail.To.Add("ldeleon@andreani.com");
+                //var multiple = _mailTo.Split(';');
+                //foreach (var to in multiple)
+                //{
+                //    if (to != string.Empty)
+                //        mail.To.Add(to);
+                //}              
                 //System.Net.Mail.Attachment attachment;
                 //attachment = new System.Net.Mail.Attachment(pathArchivo);
                 //mail.Attachments.Add(attachment);
@@ -47,15 +52,26 @@ namespace Workers.Mail
                 mail.Subject = subject;
                 mail.Body = bodyMsg;
                 mail.IsBodyHtml = true;
-
-                SmtpClient smtp = new SmtpClient(_smtpServer);
-                smtp.EnableSsl = false;
+                Console.WriteLine(bodyMsg);
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+                smtp.EnableSsl = true;
                 smtp.Port = 25;
-                smtp.UseDefaultCredentials = true;
+                smtp.UseDefaultCredentials = false;
+
+                string user = "leosendmailoe@gmail.com";
+                string pass = "ordenexterna";
+                NetworkCredential userCredential = new NetworkCredential(user, pass);
+
+                smtp.Credentials = userCredential;
+
                 smtp.Send(mail);
             }
             catch (Exception ex)
             {
+                Console.WriteLine("dentro de casa mail");
+                //Console.WriteLine(_mailFrom);
+                //Console.WriteLine(_mailTo);
+                Console.WriteLine(ex.Message);
                 //_logger.LogError(ex, "Se produjo una excepción en el metodo SendEmail: ", ex.Message);
             }
         }

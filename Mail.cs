@@ -54,9 +54,9 @@ namespace Workers.Mail
                 mail.IsBodyHtml = true;
                 Console.WriteLine(bodyMsg);
                 SmtpClient smtp = new SmtpClient("10.20.7.16");
-                smtp.EnableSsl = false;
+                smtp.EnableSsl = true;
                 smtp.Port = 25;
-                smtp.UseDefaultCredentials = false;
+                smtp.UseDefaultCredentials = true;
 
                 //string user = "leosendmailoe@gmail.com";
                 //string pass = "ordenexterna";

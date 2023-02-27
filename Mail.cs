@@ -63,7 +63,7 @@ namespace Workers.Mail
                 //NetworkCredential userCredential = new NetworkCredential(user, pass);
 
                 //smtp.Credentials = userCredential;
-
+                Console.WriteLine("antes  smtp.Send(mail)");
                 smtp.Send(mail);
             }
             catch (Exception ex)

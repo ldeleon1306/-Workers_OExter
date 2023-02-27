@@ -55,7 +55,7 @@ namespace Workers.Mail
                 Console.WriteLine(bodyMsg);
                 SmtpClient smtp = new SmtpClient("10.20.7.16");
                 smtp.EnableSsl = true;
-                smtp.Port = 587;
+                smtp.Port = 25;
                 smtp.UseDefaultCredentials = false;
 
                 //string user = "leosendmailoe@gmail.com";

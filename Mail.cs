@@ -30,7 +30,7 @@ namespace Workers.Mail
                 MailMessage mail = new MailMessage();
                 //Console.WriteLine(_mailFrom.ToString());
                 //Console.WriteLine(_mailTo);
-                mail.From = new MailAddress("ldeleon@andreani.com");
+                mail.From = new MailAddress("apptestbrdcsrv@andreani.com");
                 mail.To.Add("ldeleon@andreani.com");
                 //var multiple = _mailTo.Split(';');
                 //foreach (var to in multiple)
@@ -53,7 +53,7 @@ namespace Workers.Mail
                 mail.Body = bodyMsg;
                 mail.IsBodyHtml = true;
                 Console.WriteLine(bodyMsg);
-                SmtpClient smtp = new SmtpClient("10.20.25.16");
+                SmtpClient smtp = new SmtpClient("10.20.7.16");
                 smtp.EnableSsl = true;
                 smtp.Port = 587;
                 smtp.UseDefaultCredentials = false;

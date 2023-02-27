@@ -54,7 +54,7 @@ namespace Workers.Mail
                 mail.IsBodyHtml = true;
                 Console.WriteLine(bodyMsg);
                 SmtpClient smtp = new SmtpClient("10.20.7.16");
-                smtp.EnableSsl = true;
+                smtp.EnableSsl = false;
                 smtp.Port = 25;
                 smtp.UseDefaultCredentials = true;
 

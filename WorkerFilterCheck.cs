@@ -14,6 +14,8 @@ using Serilog;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Workers.Models;
+using Workers.DataContext;
+using Microsoft.Data.SqlClient;
 
 namespace Workers
 {
@@ -54,24 +56,45 @@ namespace Workers
             {
                 try
                 {
-                    //MONGO
+             /////////MONGO
                     List<CollectionMongo> ListPedMongo = Mongo.GetMongoCollection();
+                    WAP_INGRESOPEDIDOS wp = new WAP_INGRESOPEDIDOS();
+                    WAP_INGRESOPEDIDOS wps = new WAP_INGRESOPEDIDOS();
                     try
                     {
-                        foreach (var listpedmongo in ListPedMongo)
-                        {                           
-                            //WAP
+                        foreach (var listpedmongo in ListPedMongo)  
+                        {
+                            Console.WriteLine("");
+                            Console.WriteLine("----------------------------------------------------------------------------------------------------------------------------------------------------------");
+                            Console.WriteLine("---------------MONGO--------------------");
+                            Console.WriteLine("Idtransaccion: " + listpedmongo.idtransaccion + "  Estado: " + listpedmongo.estado);
+            /////////FIN MONGO
+            /////////WAP
                             using (Wap_IngresosPedidosContext db = new Wap_IngresosPedidosContext())
                             {
-                                var estados = db.WAP_INGRESOPEDIDOS
-                                    .Where(p => p.IdTransacción == Convert.ToString(listpedmongo.idtransaccion) && p.Estado == 2);//NOS IMPORTA SOLO ESTADO 2, ESTADO 3 ES REPETIDO
-                                //SI NO ESTA EN ESTADO 2, BUSCAR EN 3 SI QUEDO CON ERROR, SINO ESTA EN AMBOS, HAY QUE INFORMAR DESDE MONGO O VER O VER
-                                //SI ESTA EN ESTADO 2 O 3 CHEQUEAMOS EN SCE
-                                foreach (WAP_INGRESOPEDIDOS e in estados)
+                                var encontroWap = Wap.GetWap(Convert.ToString(listpedmongo.idtransaccion));
+
+                                if (encontroWap.Item1>0) 
                                 {
-                                    Console.WriteLine("Idtransaccion: "+ e.IdTransacción + " Propietario: " +  e.Propietario + " Estado: " + e.Estado + " RazonFalla: " + e.RazonFalla);
+                                    wp.OrdenExterna1 = encontroWap.Item2; wp.Almacen = encontroWap.Item3; wp.RazonFalla = encontroWap.Item4; wp.Estado = encontroWap.Item5; 
+                                    Console.WriteLine("---------------WAP--------------------");
+                                    Console.WriteLine("OrdenExterna1: " + wp.OrdenExterna1 + "  Almacen: " + wp.Almacen + "  Estado: " + wp.Estado + "  RazonFalla: " + wp.RazonFalla);                                                     
+
+                               
+            /////////FIN WAP
+            ///////SCE
+                                    int encontroSCE = Sce.conectarSce(wp.OrdenExterna1, wp.Almacen);
+                                    if (encontroSCE==0)//no encontro en sce pero si en wap
+                                    {
+                                        //reprocesar back
+                                    }
                                 }
-                                //FIN WAP
+            /////////FIN SCE}  
+
+                                else
+                                {
+                                    //reprocesar API o CLIENTE
+                                }
                             }
                         }
                     }

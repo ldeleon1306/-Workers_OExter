@@ -49,13 +49,13 @@ namespace Workers.Models
                 var collection = database.GetCollection<BsonDocument>("TransaccionesPedidos");
 
                 var list = collection.Find(new BsonDocument())
-                     .Limit(2) //retrive only two documents
+                     .Limit(20) //retrive only two documents
                     .ToList();
         
                 foreach (var docs in list)
                 {
                     //_logger.LogInformation(docs.ToString());
-                    Console.WriteLine("Idtransaccion: " + docs["response"]["idtransaccion"] + "  Estado: " + docs["estado"]);
+                    //Console.WriteLine("Idtransaccion: " + docs["response"]["idtransaccion"] + "  Estado: " + docs["estado"]);
 
                     listRange.Add(new CollectionMongo() { idtransaccion = (int)Convert.ToInt64(docs["response"]["idtransaccion"]), estado = (string)docs["estado"] });
                     //_logger.LogInformation(docs.ToString());

@@ -9,8 +9,10 @@ namespace Workers.Models
     {
         public string IdTransacción  { get; set; }
         [Key]
+        public string OrdenExterna1 { get; set; }
         public string Propietario { get; set; }
         public string RazonFalla { get; set; }
-        public int Estado { get; set; }
+        public string Almacen { get; set; }
+        public int Estado { get; set; }        
     }
 }

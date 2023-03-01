@@ -23,7 +23,7 @@ namespace Workers.Models
                 var collection = database.GetCollection<BsonDocument>("TransaccionesPedidos");
 
                 var list = collection.Find(new BsonDocument())
-                     .Limit(20) //retrive only two documents
+                     .Limit(2) //retrive only two documents
                     .ToList();
         
                 foreach (var docs in list)

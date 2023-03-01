@@ -1,7 +1,3 @@
-C:\Users\ldeleon\source\repos\WorkerS_OExtern\obj\Debug\netcoreapp3.1\Workers.csproj.AssemblyReference.cache
-C:\Users\ldeleon\source\repos\WorkerS_OExtern\obj\Debug\netcoreapp3.1\Workers.AssemblyInfoInputs.cache
-C:\Users\ldeleon\source\repos\WorkerS_OExtern\obj\Debug\netcoreapp3.1\Workers.AssemblyInfo.cs
-C:\Users\ldeleon\source\repos\WorkerS_OExtern\obj\Debug\netcoreapp3.1\Workers.csproj.CoreCompileInputs.cache
 C:\Users\ldeleon\source\repos\WorkerS_OExtern\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\ldeleon\source\repos\WorkerS_OExtern\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\ldeleon\source\repos\WorkerS_OExtern\bin\Debug\netcoreapp3.1\Workers.exe
@@ -94,6 +90,9 @@ C:\Users\ldeleon\source\repos\WorkerS_OExtern\bin\Debug\netcoreapp3.1\runtimes\w
 C:\Users\ldeleon\source\repos\WorkerS_OExtern\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\ldeleon\source\repos\WorkerS_OExtern\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.ServiceProcess.ServiceController.dll
 C:\Users\ldeleon\source\repos\WorkerS_OExtern\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.1\System.Text.Encoding.CodePages.dll
+C:\Users\ldeleon\source\repos\WorkerS_OExtern\obj\Debug\netcoreapp3.1\Workers.AssemblyInfoInputs.cache
+C:\Users\ldeleon\source\repos\WorkerS_OExtern\obj\Debug\netcoreapp3.1\Workers.AssemblyInfo.cs
+C:\Users\ldeleon\source\repos\WorkerS_OExtern\obj\Debug\netcoreapp3.1\Workers.csproj.CoreCompileInputs.cache
 C:\Users\ldeleon\source\repos\WorkerS_OExtern\obj\Debug\netcoreapp3.1\Workers.csproj.CopyComplete
 C:\Users\ldeleon\source\repos\WorkerS_OExtern\obj\Debug\netcoreapp3.1\Workers.dll
 C:\Users\ldeleon\source\repos\WorkerS_OExtern\obj\Debug\netcoreapp3.1\Workers.pdb

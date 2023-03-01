@@ -59,7 +59,7 @@ namespace Workers
              /////////MONGO
                     List<CollectionMongo> ListPedMongo = Mongo.GetMongoCollection();
                     WAP_INGRESOPEDIDOS wp = new WAP_INGRESOPEDIDOS();
-                    WAP_INGRESOPEDIDOS wps = new WAP_INGRESOPEDIDOS();
+                    List<WAP_INGRESOPEDIDOS> listWapReprocesar = new List<WAP_INGRESOPEDIDOS>();
                     try
                     {
                         foreach (var listpedmongo in ListPedMongo)  
@@ -87,6 +87,7 @@ namespace Workers
                                     if (encontroSCE==0)//no encontro en sce pero si en wap
                                     {
                                         //reprocesar back
+                                        listWapReprocesar.Add(new WAP_INGRESOPEDIDOS() {OrdenExterna1 = wp.OrdenExterna1,Almacen=wp.Almacen,Estado=wp.Estado,RazonFalla=wp.RazonFalla });
                                     }
                                 }
             /////////FIN SCE}  
@@ -97,6 +98,21 @@ namespace Workers
                                 }
                             }
                         }
+                        if (File.Exists("output.txt")) File.Delete("output.txt");
+                        using StreamWriter streamwriter = File.AppendText("output.txt");
+                        foreach (var line in listWapReprocesar)
+                        {                         
+                           
+                            streamwriter.WriteLine(line.OrdenExterna1);
+                            Console.WriteLine(line.OrdenExterna1);
+                        }
+                        streamwriter.Close();
+                        //foreach (var item in listWapReprocesar)
+                        //{
+                        //    Console.WriteLine(item.OrdenExterna1,item.Almacen,item.Estado,item.RazonFalla);
+                        //}
+                        Mail.Mail m = new Mail.Mail(_configuration);
+                        m.SendEmail(listWapReprocesar, "cliente");
                     }
                     catch (Exception ex)
                     {
@@ -107,9 +123,7 @@ namespace Workers
                 {
                     Console.WriteLine(ex.Message);
                 }
-
-                Mail.Mail m = new Mail.Mail(_configuration);
-                m.SendEmail("nada", "cliente");
+               
             }
             catch (Exception ex)
             {

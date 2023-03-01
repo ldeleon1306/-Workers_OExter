@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using Workers.Models;
 
 namespace Workers.Mail
 {
@@ -22,7 +23,7 @@ namespace Workers.Mail
             _smtpServer = _configuration["MailSmtp:smtp"];
         }
 
-        public void SendEmail(string pathArchivo, string cliente)
+        public void SendEmail(List<WAP_INGRESOPEDIDOS> listWapReprocesar, string cliente)
         {
             try
             {
@@ -38,9 +39,9 @@ namespace Workers.Mail
                 //    if (to != string.Empty)
                 //        mail.To.Add(to);
                 //}              
-                //System.Net.Mail.Attachment attachment;
-                //attachment = new System.Net.Mail.Attachment(pathArchivo);
-                //mail.Attachments.Add(attachment);
+                System.Net.Mail.Attachment attachment;
+                attachment = new System.Net.Mail.Attachment("output.txt");
+                mail.Attachments.Add(attachment);
                 //if (!String.IsNullOrEmpty(txterror))
                 //{
                 //  attachment = new System.Net.Mail.Attachment(txterror);

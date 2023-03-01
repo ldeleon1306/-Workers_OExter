@@ -23,7 +23,7 @@ namespace Workers.Models
                     {
                         count++;
                         Console.WriteLine("---------------SCE--------------------");
-                        Console.WriteLine(String.Format("{0}, {1},{2}",
+                        Console.WriteLine(String.Format("EXTERNORDERKEY: {0},WHSEID: {1},STATUS: {2}",
                         reader["EXTERNORDERKEY"], reader["WHSEID"], reader["STATUS"]));// etc
                     }
                 }

@@ -34,7 +34,7 @@ namespace WorkerS_OExtern
         {
             try
             {
-                var client = new MongoClient("mongodb://10.20.2.46:27017");
+                var client = new MongoClient("mongodb://10.20.7.44:27017");
                 List<string> NombrebaseDatos = client.ListDatabaseNames().ToList();
                 var database = client.GetDatabase("APIAlmacenes");
 

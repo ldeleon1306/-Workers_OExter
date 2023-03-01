@@ -98,15 +98,15 @@ namespace Workers
                                 }
                             }
                         }
-                        if (File.Exists("output.txt")) File.Delete("output.txt");
-                        using StreamWriter streamwriter = File.AppendText("output.txt");
-                        foreach (var line in listWapReprocesar)
-                        {                         
+                        //if (File.Exists("output.txt")) File.Delete("output.txt");
+                        //using StreamWriter streamwriter = File.AppendText("output.txt");
+                        //foreach (var line in listWapReprocesar)
+                        //{                         
                            
-                            streamwriter.WriteLine(line.OrdenExterna1);
-                            Console.WriteLine(line.OrdenExterna1);
-                        }
-                        streamwriter.Close();
+                        //    streamwriter.WriteLine(line.OrdenExterna1);
+                        //    Console.WriteLine(line.OrdenExterna1);
+                        //}
+                        //streamwriter.Close();
                         //foreach (var item in listWapReprocesar)
                         //{
                         //    Console.WriteLine(item.OrdenExterna1,item.Almacen,item.Estado,item.RazonFalla);

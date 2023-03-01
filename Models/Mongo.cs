@@ -16,7 +16,7 @@ namespace Workers.Models
             List<CollectionMongo> listRange = new List<CollectionMongo>();
             try
             {
-                var client = new MongoClient("mongodb://10.20.2.46:27017");
+                var client = new MongoClient("mongodb://10.20.2.46:27017?connect=replicaSet");
                 List<string> NombrebaseDatos = client.ListDatabaseNames().ToList();
                 var database = client.GetDatabase("APIAlmacenes");
 

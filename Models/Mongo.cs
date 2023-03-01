@@ -16,7 +16,9 @@ namespace Workers.Models
             List<CollectionMongo> listRange = new List<CollectionMongo>();
             try
             {
+                Console.WriteLine("entra a mongo 19");
                 var client = new MongoClient("mongodb://10.20.2.46:27017?connect=replicaSet");
+                Console.WriteLine("conecto a mongo 21");
                 List<string> NombrebaseDatos = client.ListDatabaseNames().ToList();
                 var database = client.GetDatabase("APIAlmacenes");
 
@@ -38,7 +40,8 @@ namespace Workers.Models
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("exepcion en mongp");
                 throw ex;
             }            
 
